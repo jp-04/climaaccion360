@@ -121,7 +121,7 @@ class AuthTestCase(unittest.TestCase):
         self.assertIn('id="primary-navigation"', anonymous_header)
         self.assertIn('href="/login">Iniciar sesión', anonymous_header)
         self.assertIn('href="/registro">Registrarse', anonymous_header)
-        self.assertNotIn("Ver plataforma", anonymous_header)
+        self.assertNotIn('class="nav-cta"', anonymous_header)
         self.assertEqual(self.client.get("/login").status_code, 200)
         self.assertEqual(self.client.get("/registro").status_code, 200)
 
@@ -132,7 +132,7 @@ class AuthTestCase(unittest.TestCase):
         self.assertIn('href="/logout">Cerrar sesión', logged_header)
         self.assertNotIn("Iniciar sesión", logged_header)
         self.assertNotIn("Registrarse", logged_header)
-        self.assertNotIn("Ver plataforma", logged_header)
+        self.assertNotIn('class="nav-cta"', logged_header)
 
     def test_authenticated_prediction_is_saved_with_metrics(self):
         self.register()
