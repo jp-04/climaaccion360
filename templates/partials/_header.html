@@ -4,20 +4,24 @@
             <span class="brand-mark" aria-hidden="true">CA</span>
             <span>ClimaAcción <strong>360</strong></span>
         </a>
-        <button class="nav-toggle" type="button" aria-label="Abrir menú" aria-expanded="false"><span></span><span></span></button>
-        <div class="nav-links">
-            <a class="{% if request.endpoint == 'index' %}is-active{% endif %}" href="{{ url_for('index') }}"{% if request.endpoint == 'index' %} aria-current="page"{% endif %}>Inicio</a>
-            <a class="{% if request.endpoint == 'ods13' %}is-active{% endif %}" href="{{ url_for('ods13') }}"{% if request.endpoint == 'ods13' %} aria-current="page"{% endif %}>ODS 13</a>
-            <a class="{% if request.endpoint == 'dashboard' %}is-active{% endif %}" href="{{ url_for('dashboard') }}"{% if request.endpoint == 'dashboard' %} aria-current="page"{% endif %}>Dashboard</a>
-            <a class="{% if request.endpoint == 'modelos' %}is-active{% endif %}" href="{{ url_for('modelos') }}"{% if request.endpoint == 'modelos' %} aria-current="page"{% endif %}>Modelos IA</a>
-            <a class="{% if request.endpoint == 'acciones' %}is-active{% endif %}" href="{{ url_for('acciones') }}"{% if request.endpoint == 'acciones' %} aria-current="page"{% endif %}>Acciones climáticas</a>
-            {% if current_user %}
-            <a class="{% if request.endpoint == 'auth.perfil' %}is-active{% endif %}" href="{{ url_for('auth.perfil') }}"{% if request.endpoint == 'auth.perfil' %} aria-current="page"{% endif %}>Mi perfil</a>
-            <a class="nav-cta" href="{{ url_for('auth.logout') }}">Cerrar sesión <span aria-hidden="true">↗</span></a>
-            {% else %}
-            <a class="{% if request.endpoint == 'auth.login' %}is-active{% endif %}" href="{{ url_for('auth.login') }}"{% if request.endpoint == 'auth.login' %} aria-current="page"{% endif %}>Iniciar sesión</a>
-            <a class="nav-cta" href="{{ url_for('auth.registro') }}">Crear cuenta <span aria-hidden="true">↗</span></a>
-            {% endif %}
+        <button class="nav-toggle" type="button" aria-label="Abrir menú" aria-controls="primary-navigation" aria-expanded="false"><span></span><span></span></button>
+        <div class="nav-links" id="primary-navigation">
+            <div class="nav-main">
+                <a class="{% if request.endpoint == 'index' %}is-active{% endif %}" href="{{ url_for('index') }}"{% if request.endpoint == 'index' %} aria-current="page"{% endif %}>Inicio</a>
+                <a class="{% if request.endpoint == 'ods13' %}is-active{% endif %}" href="{{ url_for('ods13') }}"{% if request.endpoint == 'ods13' %} aria-current="page"{% endif %}>ODS 13</a>
+                <a class="{% if request.endpoint == 'dashboard' %}is-active{% endif %}" href="{{ url_for('dashboard') }}"{% if request.endpoint == 'dashboard' %} aria-current="page"{% endif %}>Dashboard</a>
+                <a class="{% if request.endpoint == 'modelos' %}is-active{% endif %}" href="{{ url_for('modelos') }}"{% if request.endpoint == 'modelos' %} aria-current="page"{% endif %}>Modelos IA</a>
+                <a class="{% if request.endpoint == 'acciones' %}is-active{% endif %}" href="{{ url_for('acciones') }}"{% if request.endpoint == 'acciones' %} aria-current="page"{% endif %}>Acciones climáticas</a>
+            </div>
+            <div class="nav-auth" aria-label="Acceso de usuario">
+                {% if current_user %}
+                <a class="nav-auth-secondary{% if request.endpoint == 'auth.perfil' %} is-active{% endif %}" href="{{ url_for('auth.perfil') }}"{% if request.endpoint == 'auth.perfil' %} aria-current="page"{% endif %}>Mi perfil</a>
+                <a class="nav-auth-primary" href="{{ url_for('auth.logout') }}">Cerrar sesión</a>
+                {% else %}
+                <a class="nav-auth-secondary{% if request.endpoint == 'auth.login' %} is-active{% endif %}" href="{{ url_for('auth.login') }}"{% if request.endpoint == 'auth.login' %} aria-current="page"{% endif %}>Iniciar sesión</a>
+                <a class="nav-auth-primary{% if request.endpoint == 'auth.registro' %} is-active{% endif %}" href="{{ url_for('auth.registro') }}"{% if request.endpoint == 'auth.registro' %} aria-current="page"{% endif %}>Registrarse</a>
+                {% endif %}
+            </div>
         </div>
     </nav>
 </header>

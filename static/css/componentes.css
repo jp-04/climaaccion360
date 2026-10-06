@@ -7,7 +7,27 @@
 
 .nav-links .is-active { color: var(--leaf); }
 .nav-links .is-active::after { content: ""; display: block; height: 2px; margin-top: 4px; background: var(--coral); }
-.nav-links .nav-cta.is-active::after { display: none; }
+.nav-links { flex: 1; min-width: 0; margin-left: clamp(24px, 4vw, 56px); gap: 18px; justify-content: space-between; }
+.nav-main, .nav-auth { display: flex; align-items: center; white-space: nowrap; }
+.nav-main { gap: clamp(12px, 1.7vw, 26px); }
+.nav-auth { gap: 8px; margin-left: auto; }
+.nav-auth a { display: inline-flex; align-items: center; justify-content: center; min-height: 40px; padding: 10px 15px; border: 1px solid transparent; font-size: 12px; font-weight: 700; transition: background-color .2s ease, color .2s ease, border-color .2s ease, transform .2s ease; }
+.nav-links .nav-auth .is-active::after { display: none; }
+.nav-links .nav-auth .nav-auth-secondary { border-color: var(--line); color: var(--leaf); background: transparent; }
+.nav-links .nav-auth .nav-auth-secondary:hover { border-color: var(--leaf); color: var(--leaf); background: #eaf0e8; }
+.nav-links .nav-auth .nav-auth-primary { color: #fff; background: var(--leaf); }
+.nav-links .nav-auth .nav-auth-primary:hover { color: #fff; background: #18563d; transform: translateY(-2px); }
+.nav-auth a:focus-visible { outline: 2px solid var(--leaf); outline-offset: 3px; }
+@media (max-width: 960px) {
+    .nav { min-height: 70px; }
+    .nav-toggle { display: flex; flex-direction: column; gap: 5px; padding: 10px 0 10px 10px; cursor: pointer; }
+    .nav-toggle span { width: 22px; height: 1px; background: var(--ink); }
+    .nav-links { display: none; position: absolute; top: 70px; left: 0; right: 0; margin-left: 0; padding: 20px; flex-direction: column; align-items: stretch; gap: 20px; background: var(--paper); border-bottom: 1px solid var(--line); }
+    .nav-links.is-open { display: flex; }
+    .nav-main { flex-direction: column; align-items: stretch; gap: 18px; }
+    .nav-auth { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); width: 100%; margin-left: 0; padding-top: 18px; border-top: 1px solid var(--line); }
+}
+@media (max-width: 520px) { .nav-auth { grid-template-columns: 1fr; } }
 .page-hero { position: relative; overflow: hidden; }
 .page-hero::after { content: "13"; position: absolute; right: -18px; bottom: -66px; color: rgba(35, 107, 79, .06); font-size: 240px; font-weight: 800; letter-spacing: -.14em; pointer-events: none; }
 .section-lead { max-width: 680px; margin-bottom: 42px; color: var(--muted); font-size: 15px; line-height: 1.75; }
