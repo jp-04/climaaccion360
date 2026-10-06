@@ -1,12 +1,29 @@
+import os
+import sqlite3
+
 from flask import Flask, jsonify, render_template, request
 
+from auth import bp as auth_bp, current_user
 from data_loader import DataValidationError, load_emissions_data, prepare_for_visualization, summarize_emissions
+from database import init_app as init_database, save_prediction
 from modelos_ml.prediccion import predecir
 from pipeline.actualizar_datos import update_dataset
 from weather_service import WeatherServiceError, get_current_weather
 
 
 app = Flask(__name__)
+secret_key = os.environ.get("SECRET_KEY")
+if not secret_key:
+    raise RuntimeError("Configura la variable de entorno SECRET_KEY antes de iniciar la app")
+app.config.update(
+    SECRET_KEY=secret_key,
+    DATABASE=os.environ.get("DATABASE_PATH", os.path.join(app.instance_path, "usuarios.db")),
+    SESSION_COOKIE_HTTPONLY=True,
+    SESSION_COOKIE_SAMESITE="Lax",
+    SESSION_COOKIE_SECURE=os.environ.get("RENDER") == "true",
+)
+init_database(app)
+app.register_blueprint(auth_bp)
 
 
 @app.route("/")
@@ -81,6 +98,12 @@ def prediccion_api():
         result = predecir(int(year_text), model_name)
     except (TypeError, ValueError, OSError) as error:
         return jsonify({"error": str(error)}), 400
+    user = current_user()
+    if user is not None:
+        try:
+            save_prediction(user["id"], result)
+        except sqlite3.Error:
+            app.logger.exception("No fue posible guardar la predicción del usuario")
     return jsonify(result)
 
 

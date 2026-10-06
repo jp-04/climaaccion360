@@ -1,0 +1,60 @@
+{% extends "base.html" %}
+
+{% block title %}Mi perfil | ClimaAcción 360{% endblock %}
+{% block extra_head %}<link rel="stylesheet" href="{{ url_for('static', filename='css/auth.css') }}">{% endblock %}
+
+{% block content %}
+<main class="profile-page container">
+    <p class="eyebrow"><span></span> Tu espacio personal</p>
+    <h1>Bienvenido,<br><em>{{ usuario['nombre'] }}.</em></h1>
+    <p class="profile-intro">Desde aquí puedes continuar explorando ClimaAcción 360.</p>
+    <div class="profile-layout">
+        <section class="profile-card" aria-labelledby="profile-title">
+            <p class="section-kicker">Mi cuenta</p>
+            <h2 id="profile-title">Datos del perfil</h2>
+            <dl>
+                <div><dt>Nombre</dt><dd>{{ usuario['nombre'] }}</dd></div>
+                <div><dt>Correo</dt><dd>{{ usuario['correo'] }}</dd></div>
+                <div><dt>Fecha de registro</dt><dd>{{ usuario['fecha_registro'][:10] }}</dd></div>
+            </dl>
+        </section>
+        <section class="profile-links" aria-labelledby="quick-links-title">
+            <p class="section-kicker">Accesos rápidos</p>
+            <h2 id="quick-links-title">Sigue explorando</h2>
+            <a href="{{ url_for('dashboard') }}"><span>01</span><strong>Dashboard</strong><b aria-hidden="true">↗</b></a>
+            <a href="{{ url_for('modelos') }}"><span>02</span><strong>Modelos IA</strong><b aria-hidden="true">↗</b></a>
+            <div class="profile-link-future"><span>03</span><strong>Huella de Carbono</strong><small>Próximamente</small></div>
+        </section>
+    </div>
+    <section class="profile-history" aria-labelledby="history-title">
+        <div class="profile-history-heading">
+            <div>
+                <p class="section-kicker">Tus consultas recientes</p>
+                <h2 id="history-title">Mi historial climático</h2>
+            </div>
+            <a class="text-link" href="{{ url_for('modelos') }}">Nueva predicción <span aria-hidden="true">↗</span></a>
+        </div>
+        {% if predicciones %}
+        <div class="history-grid">
+            {% for item in predicciones %}
+            <article class="history-card">
+                <div class="history-card-top">
+                    <span>{{ modelos.get(item['modelo'], item['modelo']) }}</span>
+                    <time datetime="{{ item['fecha'] }}">{{ item['fecha'][:16]|replace('T', ' ') }} UTC</time>
+                </div>
+                <p class="history-year">Año objetivo <strong>{{ item['año_objetivo'] }}</strong></p>
+                <p class="history-result"><strong>{{ '%.3f'|format(item['prediccion']) }}</strong><span>t CO₂ / cápita</span></p>
+                <dl class="history-metrics">
+                    <div><dt>R²</dt><dd>{{ '%.3f'|format(item['r2']) }}</dd></div>
+                    <div><dt>MAE</dt><dd>{{ '%.3f'|format(item['mae']) }}</dd></div>
+                    <div><dt>RMSE</dt><dd>{{ '%.3f'|format(item['rmse']) }}</dd></div>
+                </dl>
+            </article>
+            {% endfor %}
+        </div>
+        {% else %}
+        <p class="history-empty">Aún no has realizado predicciones climáticas.</p>
+        {% endif %}
+    </section>
+</main>
+{% endblock %}

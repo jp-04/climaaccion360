@@ -11,7 +11,7 @@
             <p class="hero-text">Una plataforma inteligente para comprender, monitorear y proyectar el comportamiento climático de Colombia, con enfoque en sostenibilidad, análisis de datos e inteligencia artificial.</p>
             <div class="hero-actions">
                 <a class="button button-primary" href="{{ url_for('dashboard') }}">Explorar plataforma <span aria-hidden="true">↗</span></a>
-                <a class="button button-outline" href="#registro">Crear cuenta <span aria-hidden="true">↗</span></a>
+                <a class="button button-outline" href="{{ url_for('auth.registro') }}">Crear cuenta <span aria-hidden="true">↗</span></a>
                 <a class="text-link hero-dashboard-link" href="{{ url_for('dashboard') }}">Ver dashboard <span aria-hidden="true">↓</span></a>
             </div>
             <div class="hero-proof"><span><i></i> Datos trazables</span><span><i></i> Investigación aplicada</span><span><i></i> ODS 13</span></div>

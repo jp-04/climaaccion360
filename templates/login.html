@@ -1,0 +1,34 @@
+{% extends "base.html" %}
+
+{% block title %}Iniciar sesión | ClimaAcción 360{% endblock %}
+{% block extra_head %}<link rel="stylesheet" href="{{ url_for('static', filename='css/auth.css') }}">{% endblock %}
+
+{% block content %}
+<main class="auth-page container">
+    <div class="auth-intro">
+        <p class="eyebrow"><span></span> Tu espacio en ClimaAcción 360</p>
+        <h1>Bienvenido<br><em>de nuevo.</em></h1>
+        <p>Inicia sesión para consultar tu perfil y acceder a los módulos de la plataforma.</p>
+    </div>
+    <section class="auth-card" aria-labelledby="login-title">
+        <p class="section-kicker">Acceso a la plataforma</p>
+        <h2 id="login-title">Iniciar sesión</h2>
+        {% for message in get_flashed_messages(category_filter=['success']) %}
+        <p class="form-message form-success" role="status">{{ message }}</p>
+        {% endfor %}
+        {% if error %}<p class="form-message form-error" role="alert">{{ error }}</p>{% endif %}
+        <form method="post" action="{{ url_for('auth.login') }}">
+            <div class="form-field">
+                <label for="correo">Correo electrónico</label>
+                <input id="correo" name="correo" type="email" value="{{ correo|default('') }}" autocomplete="email" maxlength="254" required>
+            </div>
+            <div class="form-field">
+                <label for="contrasena">Contraseña</label>
+                <input id="contrasena" name="contrasena" type="password" autocomplete="current-password" required>
+            </div>
+            <button class="button button-primary auth-submit" type="submit">Entrar <span aria-hidden="true">↗</span></button>
+        </form>
+        <p class="auth-switch">¿Aún no tienes cuenta? <a href="{{ url_for('auth.registro') }}">Crear cuenta</a></p>
+    </section>
+</main>
+{% endblock %}
