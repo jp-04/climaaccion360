@@ -82,3 +82,23 @@
 @media (max-width: 1120px) { .hero-home .hero-shell { width: min(100% - 72px, 1000px); grid-template-columns: minmax(320px, .86fr) minmax(470px, 1.14fr); gap: 48px; }.hero-home h1 { font-size: clamp(56px, 6.8vw, 78px); }.hero-home .hero-visual { min-height: 540px; }.hero-home .live-monitor { right: 6%; bottom: 12%; } }
 @media (max-width: 800px) { .hero-home .hero-shell { width: min(100% - 40px, 600px); grid-template-columns: 1fr; gap: 48px; padding-top: 62px; padding-bottom: 64px; }.hero-home .hero-copy { max-width: 560px; padding-left: 0; }.hero-home h1 { max-width: 560px; font-size: clamp(58px, 13vw, 82px); }.hero-home .hero-visual { width: 100%; min-height: 570px; justify-self: stretch; }.hero-home .live-monitor { right: 50%; bottom: 11%; transform: translateX(50%); }.hero-home .module-ai { right: 3%; }.hero-home .stage-footer span:last-child { display: none; } }
 @media (max-width: 520px) { .hero-home .hero-shell { width: calc(100% - 28px); gap: 34px; padding-top: 48px; }.hero-home h1 { font-size: 16vw; line-height: .93; }.hero-home .hero-text { max-width: 100%; font-size: 14px; }.hero-home .hero-visual { min-height: 585px; }.hero-home .live-monitor { right: 50%; bottom: 46px; width: calc(100% - 28px); transform: translateX(50%); }.hero-home .floating-module { opacity: .42; transform: scale(.82); }.hero-home .module-data { top: 10%; left: 2%; }.hero-home .module-ai { top: 41%; right: 2%; }.hero-home .module-ods { left: 3%; bottom: 10%; }.hero-home .data-point { opacity: .4; }.hero-home .visual-core { top: 32%; transform: scale(.72); }.hero-home .stage-header { left: 15px; right: 15px; }.hero-home .stage-footer { left: 15px; right: 15px; } }
+
+/* Decorative layers must not intercept the hero links. */
+.hero-home::before,
+.hero-home::after,
+.hero-home .hero-atmosphere,
+.hero-home .hero-atmosphere *,
+.hero-home .hero-atmosphere::before,
+.hero-home .hero-atmosphere::after,
+.hero-home .hero-visual,
+.hero-home .hero-visual *,
+.hero-home .hero-visual::before,
+.hero-home .hero-visual::after,
+.hero-home .hero-scroll {
+    pointer-events: none;
+}
+
+.hero-home .hero-copy { position: relative; z-index: 10; }
+.hero-home .hero-actions { position: relative; z-index: 11; }
+.hero-home .hero-actions a,
+.hero-home .hero-actions button { position: relative; z-index: 12; pointer-events: auto; }

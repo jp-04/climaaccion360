@@ -105,6 +105,16 @@ class AuthTestCase(unittest.TestCase):
         with patch("app.update_dataset", return_value=5):
             self.assertEqual(self.client.post("/api/actualizar-datos").status_code, 200)
 
+    def test_home_hero_links_resolve_to_live_pages(self):
+        home = self.client.get("/")
+        self.assertEqual(home.status_code, 200)
+        html = home.get_data(as_text=True)
+        self.assertIn('class="button button-outline" href="/registro">Crear cuenta', html)
+        self.assertIn('class="button button-primary" href="/dashboard">Explorar plataforma', html)
+        self.assertIn('class="text-link hero-dashboard-link" href="/dashboard">Ver dashboard', html)
+        self.assertEqual(self.client.get("/registro").status_code, 200)
+        self.assertEqual(self.client.get("/dashboard").status_code, 200)
+
     def test_authenticated_prediction_is_saved_with_metrics(self):
         self.register()
         self.login()
