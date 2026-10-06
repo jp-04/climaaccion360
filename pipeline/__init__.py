@@ -1,0 +1,1 @@
+"""Pipeline ETL para datos climáticos de ClimaAcción 360."""

@@ -1,0 +1,66 @@
+{% extends "base.html" %}
+{% block title %}Modelos predictivos | ClimaAcción 360{% endblock %}
+{% block body_class %}inner-page{% endblock %}
+{% block extra_head %}<script src="https://cdn.plot.ly/plotly-2.35.2.min.js"></script>{% endblock %}
+{% block content %}
+<main>
+    <section class="page-hero container">
+        <p class="eyebrow"><span></span> Inteligencia climática</p>
+        <h1>Modelos para<br><em>anticipar.</em></h1>
+        <p>Experimenta con modelos entrenados sobre la serie real de emisiones de Colombia y compara sus resultados.</p>
+    </section>
+
+    <section class="ml-lab-section">
+        <div class="container">
+            <div class="lab-heading">
+                <div>
+                    <p class="section-kicker">01 / Laboratorio de IA</p>
+                    <h2>Una pregunta.<br><em>Dos modelos.</em></h2>
+                </div>
+                <p>Selecciona un algoritmo y un año objetivo. La predicción se consulta al servicio ML de ClimaAcción 360.</p>
+            </div>
+            <form class="prediction-form" id="prediction-form" data-prediction-form>
+                <div class="field-group">
+                    <label for="model-select">Modelo</label>
+                    <select id="model-select" name="modelo">
+                        <option value="regresion_lineal">Regresión lineal</option>
+                        <option value="arbol_decision">Árbol de decisión</option>
+                    </select>
+                </div>
+                <div class="field-group">
+                    <label for="target-year">Año objetivo</label>
+                    <input id="target-year" name="año" type="number" min="1900" max="2100" value="2030" required>
+                </div>
+                <button class="button button-primary" type="submit" id="prediction-submit">Realizar predicción <span aria-hidden="true">↗</span></button>
+            </form>
+            <p class="lab-status" id="prediction-status" role="status" aria-live="polite">Listo para recibir un escenario.</p>
+        </div>
+    </section>
+
+    <section class="prediction-results container" id="prediction-results" aria-live="polite" hidden>
+        <div class="section-heading">
+            <div><p class="section-kicker">02 / Resultado</p><h2>Lectura del<br><em>escenario.</em></h2></div>
+            <p>Resultados generados por el modelo seleccionado y comparados con la serie histórica disponible.</p>
+        </div>
+        <div class="result-grid">
+            <article class="result-card result-primary"><span class="result-label">Predicción CO₂ per cápita</span><strong id="result-prediction">—</strong><small>toneladas por persona</small></article>
+            <article class="result-card"><span class="result-label">Año solicitado</span><strong id="result-year">—</strong><small>horizonte consultado</small></article>
+            <article class="result-card"><span class="result-label">Modelo utilizado</span><strong id="result-model">—</strong><small>algoritmo seleccionado</small></article>
+        </div>
+        <div class="metric-result-grid">
+            <div><span>R²</span><strong id="result-r2">—</strong></div>
+            <div><span>MAE</span><strong id="result-mae">—</strong></div>
+            <div><span>RMSE</span><strong id="result-rmse">—</strong></div>
+        </div>
+        <div class="prediction-chart-shell">
+            <div class="chart-heading"><div><p class="section-kicker">03 / Comparación</p><h3>Historia real vs. escenario</h3></div><span class="chart-legend"><i></i> Real <i class="legend-prediction"></i> Predicción</span></div>
+            <div id="prediction-chart" class="prediction-chart" data-chart="ml-comparison" aria-label="Gráfico comparativo de datos históricos reales y predicción"><div class="chart-empty"><span>⌁</span><p>El gráfico comparativo aparecerá al completar la consulta.</p></div></div>
+        </div>
+    </section>
+
+    <section class="detail-section container">
+        <div class="section-heading"><div><p class="section-kicker">04 / Modelos disponibles</p><h2>Comparar antes<br>de predecir.</h2></div><p>Dos aproximaciones para explorar relaciones entre el tiempo y las emisiones de CO₂ per cápita.</p></div>
+        <div class="model-card-grid"><article class="model-card"><span class="model-number">MODELO 01</span><h3>Regresión lineal</h3><p>Referencia interpretable para estudiar una tendencia global en la serie.</p><div class="metric-row"><span class="metric-chip">R²</span><span class="metric-chip">MAE</span></div></article><article class="model-card"><span class="model-number">MODELO 02</span><h3>Árbol de decisión</h3><p>Modelo basado en reglas para capturar cambios y umbrales en los datos.</p><div class="metric-row"><span class="metric-chip">R²</span><span class="metric-chip">RMSE</span></div></article><article class="model-card"><span class="model-number">FUENTE</span><h3>Serie Colombia</h3><p>La comparación utiliza los registros reales servidos por la API climática.</p><div class="metric-row"><span class="metric-chip">CO₂ / cápita</span></div></article></div>
+    </section>
+</main>
+{% endblock %}

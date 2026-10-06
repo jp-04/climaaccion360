@@ -1,0 +1,91 @@
+{% extends "base.html" %}
+
+{% block content %}
+<main id="inicio">
+    <section class="hero hero-home">
+        <div class="hero-atmosphere" aria-hidden="true"><span class="atmosphere-orb orb-a"></span><span class="atmosphere-orb orb-b"></span><span class="atmosphere-grid"></span><span class="atmosphere-particles"></span><span class="atmosphere-glow glow-a"></span><span class="atmosphere-glow glow-b"></span></div>
+        <div class="hero-shell container">
+        <div class="hero-copy">
+            <p class="eyebrow"><span></span> Observatorio universitario · Colombia</p>
+            <h1><span>ClimaAcción</span> <em>360.</em></h1>
+            <p class="hero-text">Una plataforma inteligente para comprender, monitorear y proyectar el comportamiento climático de Colombia, con enfoque en sostenibilidad, análisis de datos e inteligencia artificial.</p>
+            <div class="hero-actions">
+                <a class="button button-primary" href="{{ url_for('dashboard') }}">Explorar plataforma <span aria-hidden="true">↗</span></a>
+                <a class="button button-outline" href="#registro">Crear cuenta <span aria-hidden="true">↗</span></a>
+                <a class="text-link hero-dashboard-link" href="{{ url_for('dashboard') }}">Ver dashboard <span aria-hidden="true">↓</span></a>
+            </div>
+            <div class="hero-proof"><span><i></i> Datos trazables</span><span><i></i> Investigación aplicada</span><span><i></i> ODS 13</span></div>
+        </div>
+        <div class="hero-visual" aria-label="Centro de monitoreo climático de Colombia">
+            <div class="stage-header"><span>Centro de monitoreo climático</span><span>CLIMA / 360</span></div>
+            <div class="stage-map"><span class="map-contour contour-a"></span><span class="map-contour contour-b"></span><span class="map-contour contour-c"></span><span class="map-node node-colombia"></span><span class="map-node node-monteria"></span><span class="map-label label-colombia">COLOMBIA</span><span class="map-label label-monteria">MONTERÍA <i></i></span></div>
+            <div class="orbit orbit-one"></div><div class="orbit orbit-two"></div><div class="orbit orbit-three"></div>
+            <div class="visual-core"><span>13</span><small>ODS</small></div>
+            <div class="data-point point-one"><span>SEÑAL</span><strong>ACTIVA</strong></div>
+            <div class="data-point point-two"><span>IA / MODELO</span><strong>EN LÍNEA</strong></div>
+            <div class="floating-module module-data"><span>01</span><strong>Datos climáticos</strong><small>Fuente oficial</small></div>
+            <div class="floating-module module-ai"><span>02</span><strong>IA predictiva</strong><small>Escenarios futuros</small></div>
+            <div class="floating-module module-ods"><span>03</span><strong>ODS 13</strong><small>Acción por el clima</small></div>
+            <aside class="live-monitor" data-live-monitor aria-label="Monitor climático en vivo">
+                <div class="monitor-header"><span class="live-indicator"><i></i> EN VIVO</span><span class="monitor-code">MONITOR / 01</span></div>
+                <div class="monitor-tags"><span>Monitoreo local</span><span>Tiempo real</span></div>
+                <div class="monitor-location"><span class="monitor-label">Ciudad actual</span><strong data-monitor-city>Montería, Córdoba</strong></div>
+                <div class="monitor-time"><strong data-monitor-time>--:--:--</strong><span data-monitor-date>--/--/----</span></div>
+                <div class="monitor-reading"><div><span class="monitor-label">Condiciones actuales</span><strong data-monitor-temperature>—</strong></div><div><span class="monitor-label">Estado climático</span><strong data-monitor-condition>Datos pendientes</strong></div></div>
+                <div class="monitor-extra"><span data-monitor-icon aria-hidden="true">◌</span><span>Humedad <strong data-monitor-humidity>—</strong></span><span>Viento <strong data-monitor-wind>—</strong></span></div>
+                <p class="monitor-note">Fuente meteorológica preparada para integración</p>
+            </aside>
+            <div class="stage-footer"><span><i></i> Sistema operativo</span><span>Montería / Córdoba / CO</span><span>Lat. 8.75° N · Long. 75.88° O</span></div>
+        </div>
+        </div>
+        <div class="hero-scroll"><span>01</span><i></i><span>Desplaza para explorar</span></div>
+    </section>
+
+    <section class="system-section container">
+        <div class="section-heading"><div><p class="section-kicker">02 / Nuestro sistema</p><h2>Del dato<br><em>a la decisión.</em></h2></div><p>ClimaAcción 360 conecta tres capas para convertir evidencia climática en comprensión y acción.</p></div>
+        <div class="system-grid">
+            <article class="system-card"><span class="system-icon">⌁</span><span class="card-number">01 / Datos</span><h3>Datos climáticos</h3><p>Fuentes oficiales, series históricas y visualizaciones para entender lo que está ocurriendo.</p><a href="{{ url_for('dashboard') }}">Abrir dashboard <span>↗</span></a></article>
+            <article class="system-card system-card-dark"><span class="system-icon">∿</span><span class="card-number">02 / Ciencia</span><h3>Inteligencia artificial</h3><p>Modelos interpretables para explorar escenarios a partir de información documentada.</p><a href="{{ url_for('modelos') }}">Explorar modelos <span>↗</span></a></article>
+            <article class="system-card"><span class="system-icon">✦</span><span class="card-number">03 / Acción</span><h3>Acción ambiental</h3><p>Conocimiento compartido para orientar soluciones individuales, comunitarias e institucionales.</p><a href="{{ url_for('acciones') }}">Ver acciones <span>↗</span></a></article>
+        </div>
+    </section>
+
+    <section class="intro-band" id="explora">
+        <div class="container intro-grid">
+            <p class="section-kicker">01 / ODS 13</p>
+            <div>
+                <h2>Acción por el clima<br><span>para un futuro posible.</span></h2>
+                <p class="intro-description">El ODS 13 llama a adoptar medidas urgentes para combatir el cambio climático y sus efectos. Es una pieza esencial de la Agenda 2030 porque conecta la evidencia científica, las políticas públicas y las decisiones cotidianas.</p>
+                <a class="inline-link" href="{{ url_for('ods13') }}">Conocer el objetivo completo <span>↗</span></a>
+            </div>
+            <div class="stat-line"><strong>13</strong><span>Objetivo de<br>la Agenda 2030</span></div>
+        </div>
+    </section>
+
+    <section class="explore-section container" id="modulos">
+        <div class="section-heading">
+            <div><p class="section-kicker">02 / Módulos de conocimiento</p><h2>Del contexto<br>a la acción.</h2></div>
+            <p>Una plataforma para aprender con rigor, explorar evidencia y descubrir respuestas climáticas.</p>
+        </div>
+        <div class="topic-grid topic-grid-six">
+            <a class="topic-card card-history" href="{{ url_for('ods13') }}"><span class="card-number">01</span><span class="card-icon" aria-hidden="true">◌</span><div><h3>Historia del ODS 13</h3><p>El recorrido internacional que dio forma a una urgencia global.</p></div><span class="card-arrow">↗</span></a>
+            <a class="topic-card card-goals" href="{{ url_for('ods13') }}"><span class="card-number">02</span><span class="card-icon" aria-hidden="true">⌁</span><div><h3>Metas principales</h3><p>Mitigación, adaptación, educación y políticas climáticas.</p></div><span class="card-arrow">↗</span></a>
+            <a class="topic-card card-challenges" href="{{ url_for('ods13') }}"><span class="card-number">03</span><span class="card-icon" aria-hidden="true">△</span><div><h3>Cambio climático</h3><p>Causas, impactos y riesgos que la investigación estudia.</p></div><span class="card-arrow">↗</span></a>
+            <a class="topic-card card-data" href="{{ url_for('dashboard') }}"><span class="card-number">04</span><span class="card-icon" aria-hidden="true">⌁</span><div><h3>Emisiones de CO₂</h3><p>Un espacio para analizar datos reales y sus tendencias.</p></div><span class="card-arrow">↗</span></a>
+            <a class="topic-card card-solutions" href="{{ url_for('acciones') }}"><span class="card-number">05</span><span class="card-icon" aria-hidden="true">✦</span><div><h3>Soluciones ambientales</h3><p>Respuestas innovadoras para avanzar hacia la resiliencia.</p></div><span class="card-arrow">↗</span></a>
+            <a class="topic-card card-models" href="{{ url_for('modelos') }}"><span class="card-number">06</span><span class="card-icon" aria-hidden="true">∿</span><div><h3>Modelos predictivos</h3><p>La arquitectura para integrar inteligencia artificial.</p></div><span class="card-arrow">↗</span></a>
+        </div>
+    </section>
+
+    <section class="research-section" id="investigacion">
+        <div class="container research-grid">
+            <div><p class="section-kicker light">03 / Laboratorio de datos</p><h2>La evidencia<br><em>mueve la acción.</em></h2><p>La plataforma se prepara para recibir fuentes verificables, visualizaciones y modelos reproducibles sobre el clima en Colombia.</p></div>
+            <div class="tool-list">
+                <a class="tool-item" href="{{ url_for('dashboard') }}"><span class="tool-index">01</span><span><strong>Dashboard climático</strong><small>Visualizaciones y análisis de datos reales</small></span><b>↗</b></a>
+                <a class="tool-item" href="{{ url_for('modelos') }}"><span class="tool-index">02</span><span><strong>Modelos predictivos</strong><small>Escenarios y aprendizaje automático</small></span><b>↗</b></a>
+                <a class="tool-item" href="{{ url_for('acciones') }}"><span class="tool-index">03</span><span><strong>Acciones climáticas</strong><small>Soluciones basadas en evidencia</small></span><b>↗</b></a>
+            </div>
+        </div>
+    </section>
+</main>
+{% endblock %}
