@@ -1,12 +1,11 @@
 """Registro, acceso y perfil de usuarios."""
 
 import re
-import sqlite3
 
 from flask import Blueprint, flash, g, redirect, render_template, request, session, url_for
 from werkzeug.security import check_password_hash, generate_password_hash
 
-from database import get_db, get_recent_predictions
+from database import INTEGRITY_ERRORS, execute, get_db, get_recent_predictions, template_row
 
 
 bp = Blueprint("auth", __name__)
@@ -16,14 +15,15 @@ EMAIL_PATTERN = re.compile(r"^[^@\s]+@[^@\s]+\.[^@\s]+$")
 def current_user():
     if "current_user" not in g:
         user_id = session.get("usuario_id")
-        g.current_user = (
-            get_db().execute(
+        row = (
+            execute(
                 "SELECT id, nombre, correo, fecha_registro FROM usuarios WHERE id = ?",
                 (user_id,),
             ).fetchone()
             if user_id is not None
             else None
         )
+        g.current_user = template_row(row)
         if user_id is not None and g.current_user is None:
             session.clear()
     return g.current_user
@@ -53,17 +53,17 @@ def registro():
             error = "Las contraseñas no coinciden."
         elif len(contrasena) < 8:
             error = "La contraseña debe tener al menos 8 caracteres."
-        elif get_db().execute("SELECT id FROM usuarios WHERE correo = ?", (correo,)).fetchone():
+        elif execute("SELECT id FROM usuarios WHERE lower(correo) = ?", (correo,)).fetchone():
             error = "Este correo ya está registrado."
 
         if error is None:
             try:
-                get_db().execute(
+                execute(
                     "INSERT INTO usuarios (nombre, correo, password_hash) VALUES (?, ?, ?)",
                     (nombre, correo, generate_password_hash(contrasena)),
                 )
                 get_db().commit()
-            except sqlite3.IntegrityError:
+            except INTEGRITY_ERRORS:
                 get_db().rollback()
                 error = "Este correo ya está registrado."
             else:
@@ -83,8 +83,8 @@ def login():
         if not correo or not contrasena:
             error = "Introduce tu correo y contraseña."
         else:
-            user = get_db().execute(
-                "SELECT id, password_hash FROM usuarios WHERE correo = ?", (correo,)
+            user = execute(
+                "SELECT id, password_hash FROM usuarios WHERE lower(correo) = ?", (correo,)
             ).fetchone()
             if user is None or not check_password_hash(user["password_hash"], contrasena):
                 error = "Correo o contraseña incorrectos."

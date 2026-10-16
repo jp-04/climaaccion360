@@ -9,6 +9,10 @@ from pathlib import Path
 from unittest.mock import patch
 
 os.environ.setdefault("SECRET_KEY", "clave-exclusiva-para-pruebas-que-no-se-usa-en-produccion")
+# App initialization runs at import time; never point these tests at Render or a real local DB.
+os.environ.pop("DATABASE_URL", None)
+_bootstrap_dir = tempfile.TemporaryDirectory()
+os.environ["DATABASE_PATH"] = str(Path(_bootstrap_dir.name) / "bootstrap.db")
 
 from app import app  # noqa: E402
 from database import get_db, init_db  # noqa: E402
@@ -18,7 +22,7 @@ class AuthTestCase(unittest.TestCase):
     def setUp(self):
         self.temp_dir = tempfile.TemporaryDirectory()
         self.addCleanup(self.temp_dir.cleanup)
-        app.config.update(TESTING=True, DATABASE=str(Path(self.temp_dir.name) / "usuarios.db"))
+        app.config.update(TESTING=True, DATABASE_URL=None, DATABASE=str(Path(self.temp_dir.name) / "usuarios.db"))
         with app.app_context():
             init_db()
         self.client = app.test_client()
@@ -222,6 +226,10 @@ class AuthTestCase(unittest.TestCase):
                        (usuario_id, modelo, año_objetivo, prediccion, r2, mae, rmse)
                        VALUES (999, 'regresion_lineal', 2030, 1.0, 1.0, 1.0, 1.0)"""
                 )
+
+
+def tearDownModule():
+    _bootstrap_dir.cleanup()
 
 
 if __name__ == "__main__":

@@ -3,7 +3,7 @@
   <desc id="description">La tabla usuarios tiene una relación de uno a cero o muchas predicciones_usuario por usuario_id. Al borrar un usuario se eliminan sus predicciones.</desc>
   <rect width="1500" height="760" fill="#f5f7f2"/>
   <text x="60" y="67" fill="#123b32" font-family="Arial, sans-serif" font-size="35" font-weight="700">ClimaAcción 360</text>
-  <text x="60" y="105" fill="#536b61" font-family="Arial, sans-serif" font-size="20">Modelo relacional SQLite · usuarios e historial de predicciones</text>
+  <text x="60" y="105" fill="#536b61" font-family="Arial, sans-serif" font-size="20">Modelo relacional · usuarios e historial de predicciones</text>
 
   <rect x="60" y="145" width="585" height="475" rx="15" fill="#ffffff" stroke="#acc8b8" stroke-width="2"/>
   <path d="M75 145 H630 Q645 145 645 160 V225 H60 V160 Q60 145 75 145 Z" fill="#175c46"/>
@@ -66,4 +66,5 @@
 
   <text x="60" y="675" fill="#365b4b" font-family="Arial, sans-serif" font-size="18">NN = NOT NULL · UQ = UNIQUE · PK = llave primaria · FK = llave foránea</text>
   <text x="60" y="709" fill="#536b61" font-family="Arial, sans-serif" font-size="16">Una predicción pertenece exactamente a un usuario; un usuario puede tener cero o muchas predicciones.</text>
+  <text x="60" y="739" fill="#536b61" font-family="Arial, sans-serif" font-size="15">Tipos mostrados: SQLite. En PostgreSQL: id BIGINT, fechas TIMESTAMPTZ y métricas DOUBLE PRECISION.</text>
 </svg>

@@ -1,11 +1,11 @@
 import os
-import sqlite3
 
+import psycopg
 from flask import Flask, jsonify, render_template, request
 
 from auth import bp as auth_bp, current_user
 from data_loader import DataValidationError, load_emissions_data, prepare_for_visualization, summarize_emissions
-from database import init_app as init_database, save_prediction
+from database import DATABASE_ERRORS, DatabaseConnectionError, init_app as init_database, save_prediction
 from modelos_ml.prediccion import predecir
 from pipeline.actualizar_datos import update_dataset
 from weather_service import WeatherServiceError, get_current_weather
@@ -18,12 +18,23 @@ if not secret_key:
 app.config.update(
     SECRET_KEY=secret_key,
     DATABASE=os.environ.get("DATABASE_PATH", os.path.join(app.instance_path, "usuarios.db")),
+    DATABASE_URL=os.environ.get("DATABASE_URL"),
     SESSION_COOKIE_HTTPONLY=True,
     SESSION_COOKIE_SAMESITE="Lax",
     SESSION_COOKIE_SECURE=os.environ.get("RENDER") == "true",
 )
 init_database(app)
 app.register_blueprint(auth_bp)
+
+
+@app.errorhandler(psycopg.InterfaceError)
+@app.errorhandler(psycopg.OperationalError)
+@app.errorhandler(DatabaseConnectionError)
+def database_unavailable(error):
+    message = "La base de datos no está disponible temporalmente."
+    if request.path.startswith("/api/"):
+        return jsonify({"error": message}), 503
+    return message, 503
 
 
 @app.route("/")
@@ -102,8 +113,8 @@ def prediccion_api():
     if user is not None:
         try:
             save_prediction(user["id"], result)
-        except sqlite3.Error:
-            app.logger.exception("No fue posible guardar la predicción del usuario")
+        except DATABASE_ERRORS:
+            app.logger.error("No fue posible guardar la predicción del usuario")
     return jsonify(result)
 
 
