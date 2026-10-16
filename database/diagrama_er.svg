@@ -1,0 +1,69 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1500" height="760" viewBox="0 0 1500 760" role="img" aria-labelledby="title description">
+  <title id="title">Diagrama entidad-relación de ClimaAcción 360</title>
+  <desc id="description">La tabla usuarios tiene una relación de uno a cero o muchas predicciones_usuario por usuario_id. Al borrar un usuario se eliminan sus predicciones.</desc>
+  <rect width="1500" height="760" fill="#f5f7f2"/>
+  <text x="60" y="67" fill="#123b32" font-family="Arial, sans-serif" font-size="35" font-weight="700">ClimaAcción 360</text>
+  <text x="60" y="105" fill="#536b61" font-family="Arial, sans-serif" font-size="20">Modelo relacional SQLite · usuarios e historial de predicciones</text>
+
+  <rect x="60" y="145" width="585" height="475" rx="15" fill="#ffffff" stroke="#acc8b8" stroke-width="2"/>
+  <path d="M75 145 H630 Q645 145 645 160 V225 H60 V160 Q60 145 75 145 Z" fill="#175c46"/>
+  <text x="90" y="197" fill="#ffffff" font-family="Arial, sans-serif" font-size="29" font-weight="700">usuarios</text>
+  <text x="90" y="258" fill="#175c46" font-family="Arial, sans-serif" font-size="18" font-weight="700">PK</text>
+  <text x="150" y="258" fill="#163b32" font-family="Consolas, monospace" font-size="19">id</text>
+  <text x="400" y="258" fill="#536b61" font-family="Consolas, monospace" font-size="16">INTEGER</text>
+  <line x1="90" y1="275" x2="615" y2="275" stroke="#dce8df"/>
+  <text x="150" y="309" fill="#163b32" font-family="Consolas, monospace" font-size="19">nombre</text>
+  <text x="400" y="309" fill="#536b61" font-family="Consolas, monospace" font-size="16">TEXT · NN</text>
+  <line x1="90" y1="326" x2="615" y2="326" stroke="#dce8df"/>
+  <text x="150" y="360" fill="#163b32" font-family="Consolas, monospace" font-size="19">correo</text>
+  <text x="400" y="360" fill="#536b61" font-family="Consolas, monospace" font-size="16">TEXT · UQ</text>
+  <line x1="90" y1="377" x2="615" y2="377" stroke="#dce8df"/>
+  <text x="150" y="411" fill="#163b32" font-family="Consolas, monospace" font-size="19">password_hash</text>
+  <text x="400" y="411" fill="#536b61" font-family="Consolas, monospace" font-size="16">TEXT · NN</text>
+  <line x1="90" y1="428" x2="615" y2="428" stroke="#dce8df"/>
+  <text x="150" y="462" fill="#163b32" font-family="Consolas, monospace" font-size="19">fecha_registro</text>
+  <text x="400" y="462" fill="#536b61" font-family="Consolas, monospace" font-size="16">TEXT · NN</text>
+  <rect x="90" y="502" width="525" height="86" rx="8" fill="#eef4ee"/>
+  <text x="110" y="532" fill="#365b4b" font-family="Arial, sans-serif" font-size="16">id: AUTOINCREMENT</text>
+  <text x="110" y="558" fill="#365b4b" font-family="Arial, sans-serif" font-size="16">correo: UNIQUE, COLLATE NOCASE</text>
+  <text x="110" y="582" fill="#365b4b" font-family="Arial, sans-serif" font-size="16">fecha_registro: UTC por defecto</text>
+
+  <rect x="855" y="145" width="585" height="475" rx="15" fill="#ffffff" stroke="#acc8b8" stroke-width="2"/>
+  <path d="M870 145 H1425 Q1440 145 1440 160 V225 H855 V160 Q855 145 870 145 Z" fill="#175c46"/>
+  <text x="885" y="197" fill="#ffffff" font-family="Arial, sans-serif" font-size="29" font-weight="700">predicciones_usuario</text>
+  <text x="885" y="258" fill="#175c46" font-family="Arial, sans-serif" font-size="18" font-weight="700">PK</text>
+  <text x="945" y="258" fill="#163b32" font-family="Consolas, monospace" font-size="19">id</text>
+  <text x="1260" y="258" fill="#536b61" font-family="Consolas, monospace" font-size="16">INTEGER</text>
+  <line x1="885" y1="275" x2="1410" y2="275" stroke="#dce8df"/>
+  <text x="885" y="303" fill="#e66c4c" font-family="Arial, sans-serif" font-size="18" font-weight="700">FK</text>
+  <text x="945" y="303" fill="#163b32" font-family="Consolas, monospace" font-size="19">usuario_id</text>
+  <text x="1260" y="303" fill="#536b61" font-family="Consolas, monospace" font-size="16">INTEGER</text>
+  <line x1="885" y1="319" x2="1410" y2="319" stroke="#dce8df"/>
+  <text x="945" y="347" fill="#163b32" font-family="Consolas, monospace" font-size="19">modelo</text>
+  <text x="1260" y="347" fill="#536b61" font-family="Consolas, monospace" font-size="16">TEXT · NN</text>
+  <line x1="885" y1="363" x2="1410" y2="363" stroke="#dce8df"/>
+  <text x="945" y="391" fill="#163b32" font-family="Consolas, monospace" font-size="19">año_objetivo</text>
+  <text x="1260" y="391" fill="#536b61" font-family="Consolas, monospace" font-size="16">INTEGER</text>
+  <line x1="885" y1="407" x2="1410" y2="407" stroke="#dce8df"/>
+  <text x="945" y="435" fill="#163b32" font-family="Consolas, monospace" font-size="19">prediccion</text>
+  <text x="1260" y="435" fill="#536b61" font-family="Consolas, monospace" font-size="16">REAL · NN</text>
+  <line x1="885" y1="451" x2="1410" y2="451" stroke="#dce8df"/>
+  <text x="945" y="479" fill="#163b32" font-family="Consolas, monospace" font-size="19">r2 · mae · rmse</text>
+  <text x="1260" y="479" fill="#536b61" font-family="Consolas, monospace" font-size="16">REAL · NN</text>
+  <line x1="885" y1="495" x2="1410" y2="495" stroke="#dce8df"/>
+  <text x="945" y="523" fill="#163b32" font-family="Consolas, monospace" font-size="19">fecha</text>
+  <text x="1260" y="523" fill="#536b61" font-family="Consolas, monospace" font-size="16">TEXT · NN</text>
+  <rect x="885" y="544" width="525" height="44" rx="8" fill="#eef4ee"/>
+  <text x="905" y="572" fill="#365b4b" font-family="Arial, sans-serif" font-size="16">Índice: usuario_id, fecha DESC, id DESC</text>
+
+  <path d="M645 335 H855" stroke="#e66c4c" stroke-width="4" fill="none"/>
+  <circle cx="645" cy="335" r="7" fill="#e66c4c"/>
+  <path d="M836 322 L855 335 L836 348" fill="none" stroke="#e66c4c" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/>
+  <rect x="674" y="293" width="143" height="31" rx="15" fill="#f5f7f2"/>
+  <text x="690" y="315" fill="#175c46" font-family="Arial, sans-serif" font-size="17" font-weight="700">1 → 0..N</text>
+  <text x="658" y="389" fill="#536b61" font-family="Arial, sans-serif" font-size="16">ON DELETE</text>
+  <text x="681" y="412" fill="#536b61" font-family="Arial, sans-serif" font-size="16">CASCADE</text>
+
+  <text x="60" y="675" fill="#365b4b" font-family="Arial, sans-serif" font-size="18">NN = NOT NULL · UQ = UNIQUE · PK = llave primaria · FK = llave foránea</text>
+  <text x="60" y="709" fill="#536b61" font-family="Arial, sans-serif" font-size="16">Una predicción pertenece exactamente a un usuario; un usuario puede tener cero o muchas predicciones.</text>
+</svg>
